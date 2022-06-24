@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+<body>
+    <main class="container">
+        <div class="register-form form">
+            <div class="login-header">
+                <h3>CREATE  AN  ACCOUNT</h3>
+            </div>
+            <form action="" method="POST">
+                {% for field in form %}
+                {% csrf_token %}
+                <label for="email">{{field.label}}</label>
+                {{field}}
+                {% endfor %}
+                <button class="signin-btn" type="submit">Sign in</button>
+            </form>
+            <p>Already have an account? <a href="{% url 'login' %}">login here</a></p>
+        </div>
+    </main>
+</body>
+{% endblock %}

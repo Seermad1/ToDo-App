@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <a href="{% url 'logout' %} ">logout</a>
+    <a href="{% url 'update-user' user.id %}">update user</a>
+    <form action="" id="your_form">
+        <input type="text" id="search_field" name="q" placeholder="search for todo here...">
+    </form>
+    <h1>Welcome,  {{user.name}}</h1>
+    <h2>{{day}}, {{date}} {{month}}</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" required name="addeditem" id="input" placeholder="add item ...">
+        <button type="submit">add</button>
+    </form>
+    {% for task in tasks %}
+    <div id="todo" class="to-do" style="display: flex;">
+        <input type="checkbox">
+        <p>{{task.title}}</p>
+        <button id="remove"><a href="{% url 'delete-task' task.id %}"> del</a></button>
+    </div>
+    {% empty %}
+    <div>
+        <p>No task yet.</p>
+    </div>
+    {% endfor %}
+
+    <script>
+        $('#search_field').change(function(){
+    $('#your_form').submit()
+});
+    </script>
+</body>
+</html>
