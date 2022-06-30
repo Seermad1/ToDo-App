@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
+    'cloudinary',
 ]
 
 AUTH_USER_MODEL = "base.User"
@@ -141,3 +145,10 @@ MEDIA_ROOT = BASE_DIR/"media/images/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+cloudinary.config( 
+  cloud_name = config("cloud_name"), 
+  api_key = config("api_key") ,
+  api_secret = config("api_secret")
+)
