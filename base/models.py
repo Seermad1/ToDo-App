@@ -1,6 +1,7 @@
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -8,7 +9,8 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=200)
-    avatar = models.ImageField(null=True, default="avatar.svg", upload_to="images/")
+    # avatar = models.ImageField(null=True, default="avatar.svg", upload_to="images/")
+    avatar = CloudinaryField('image')
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
